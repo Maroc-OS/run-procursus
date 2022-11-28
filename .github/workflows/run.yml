@@ -17,7 +17,7 @@ on:
       source:
         description: "Specific Procursus repository (e.g ProcursusTeam/Procursus)"
         required: false
-        default: "ProcursusTeam/Procursus"
+        default: "Maroc-OS/Procursus"
       branch:
         description: "Branch in source to checkout"
         required: false
