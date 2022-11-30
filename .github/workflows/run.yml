@@ -41,7 +41,7 @@ jobs:
         with:
           repository: "${{ github.event.inputs.source }}"
           ref: "${{ github.event.inputs.branch }}"
-          token: ${{ secrets.build_proc }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Procursus
         uses: beerpiss/procursus-action@v1
