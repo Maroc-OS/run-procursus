@@ -55,8 +55,8 @@ jobs:
           gmake ${{ github.event.inputs.rule }} \
             MEMO_TARGET=${{ github.event.inputs.target }} \
             MEMO_CFVER=${{ github.event.inputs.cfver }} \
-            AGREE_CORECRYPTO_INTERNAL_USE_LICENSE_AGREEMENT=1 \
-            BUILD_ROOT="${{ github.workspace }}" NO_PGP=1
+            BUILD_ROOT="${{ github.workspace }}" NO_PGP=1 \
+            AGREE_CORECRYPTO_INTERNAL_USE_LICENSE_AGREEMENT=1
 
       - name: Check for build_{base,dist}
         id: info
