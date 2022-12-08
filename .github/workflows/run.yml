@@ -46,7 +46,7 @@ jobs:
       - name: Setup Procursus
         uses: beerpiss/procursus-action@v1
         with:
-          packages: odcctools autoconf automake autopoint gtk-doc-tools bash bison cmake curl docbook-xml docbook-xsl fakeroot findutils flex gawk git gnupg groff grep gzip ldid ld64 libtool make ncurses-bin openssl patch pkg-config po4a python3 sed tar triehash xz-utils zstd
+          packages: clang dsymutil odcctools text-cmds odcctools autoconf automake autopoint gtk-doc-tools bash bison cmake curl docbook-xml docbook-xsl fakeroot findutils flex gawk git gnupg groff grep gzip ldid ld64 libtool make ncurses-bin openssl patch pkg-config po4a python3 sed tar triehash xz-utils zstd
           cache: true
           mirror: 'https://procursus.itsnebula.net/'
 
@@ -55,7 +55,9 @@ jobs:
           gmake ${{ github.event.inputs.rule }} \
             MEMO_TARGET=${{ github.event.inputs.target }} \
             MEMO_CFVER=${{ github.event.inputs.cfver }} \
-            BUILD_ROOT="${{ github.workspace }}" NO_PGP=1 \
+            BUILD_ROOT="${{ github.workspace }}" \
+            NO_PGP=1 \
+            MEMO_QUIET=1 \
             AGREE_CORECRYPTO_INTERNAL_USE_LICENSE_AGREEMENT=1
 
       - name: Check for build_{base,dist}
