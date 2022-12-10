@@ -22,12 +22,20 @@ on:
         description: "Branch in source to checkout"
         required: false
         default: "main"
+      ssh-strap:
+        description: "Build strapped ssh"
+        required: false
+        default: "true"
       upload-base:
         description: "Upload existant build_base"
         required: false
         default: "false"
       upload-dist:
         description: "Upload existant build_dist"
+        required: false
+        default: "true"
+      upload-strap:
+        description: "Upload existant build_strap"
         required: false
         default: "true"
 
@@ -55,6 +63,7 @@ jobs:
           gmake ${{ github.event.inputs.rule }} \
             MEMO_TARGET=${{ github.event.inputs.target }} \
             MEMO_CFVER=${{ github.event.inputs.cfver }} \
+            SSH_STRAP=${{ github.event.inputs.ssh-strap }} \
             BUILD_ROOT="${{ github.workspace }}" \
             NO_PGP=1 \
             MEMO_QUIET=1 \
@@ -75,6 +84,12 @@ jobs:
               echo "::set-output name=build-dist-exists::false"
           fi
 
+          if [ -d "build_strap" ]; then
+              echo "::set-output name=build-strap-exists::true"
+          else
+              echo "::set-output name=build-strap-exists::false"
+          fi
+
       - name: Upload build_base
         if: steps.info.outputs.build-base-exists == 'true' && github.event.inputs.upload-base == 'true'
         uses: actions/upload-artifact@v3
@@ -88,3 +103,10 @@ jobs:
         with:
           name: build_dist
           path: build_dist/
+
+      - name: Upload build_strap
+        if: steps.info.outputs.build-strap-exists == 'true' && github.event.inputs.upload-strap == 'true'
+        uses: actions/upload-artifact@v3
+        with:
+          name: build_strap
+          path: build_strap/
