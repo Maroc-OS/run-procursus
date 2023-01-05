@@ -52,7 +52,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Procursus
-        uses: beerpiss/procursus-action@v1
+        uses: beerpiss/procursus-action@main
         with:
           packages: clang odcctools odcctools autoconf automake autopoint gtk-doc-tools bash bison cmake curl docbook-xml docbook-xsl fakeroot findutils flex gawk git gnupg groff grep gzip ldid ld64 libtool make ncurses-bin openssl patch pkg-config po4a python3 sed tar triehash xz-utils zstd
           cache: true
